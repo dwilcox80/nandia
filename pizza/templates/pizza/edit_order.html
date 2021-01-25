@@ -1,11 +1,13 @@
-<h1>Edit Pizza Order</h1>
+{% extends 'pizza/base.html' %}
 
-<form action="{% url 'edit_order' pizza.id %}" method="post">
-    {% csrf_token %}
-    {{ pizzaform }}
-    <button type="submit">Edit Pizza</button>
-</form>
+{% load widget_tweaks %}
 
-{% if note %}
-    <p>{{ note }}</p>
-{% endif %}
+{% block content %}
+
+    <div class="container py-4 px-2">
+        <h2>Edit Pizza Order</h2>
+    </div>
+
+    {% include 'pizza/order_form.html' %}
+
+{% endblock %}

@@ -1,110 +1,37 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+{% extends 'pizza/base.html' %}
 
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+{% block content %}
 
-    <title>Nandia's Garden</title>
-</head>
-<body>
-{% load widget_tweaks %}
+    {% load widget_tweaks %}
 
-<div class="container px-4">
-    <h1>Order a Pizza</h1>
+    <div class="container py-4 px-2">
+        <h1>Order a Pizza</h1>
+    </div>
 
-    <form action="{% url 'order' %}" method="post" novalidate>
-        {% csrf_token %}
-        <div class="form-control">
-            <div class="row g-5">
-                <div class="col">
-                    <div class="p-3">
-                        <label for="{{ form.size_selection.id_for_label }}">{{ form.size_selection.label }}</label>
-                        {{ form.size_selection|add_class:'form-select' }}
-                        {% for error in field.errors %}
-                            <span class="help-block">{{ error }}</span>
+    {% include 'pizza/order_form.html' %}
+
+    <div class="container py-4 px-2">
+        <h2>Want to order more than one pizza?</h2>
+    </div>
+
+    <div class="container px-4">
+        <form action="{% url 'multi_pizzas' %}" method='get'>
+            <div class="form-control">
+                <div class="row g-5">
+                    <div class="col-md-2">
+                        {% for field in multiple_form %}
+                            {{ field.label_tag }}
+                            {% render_field field class="input-group mb-3" %}
                         {% endfor %}
                     </div>
                 </div>
-                <div class="col">
-                    <div class="p-3">
-                        <label for="{{ form.crust_selection.id_for_label }}">{{ form.crust_selection.label }}</label>
-                        {{ form.crust_selection|add_class:'form-select' }}
-                        {% for error in field.errors %}
-                            <span class="help-block">{{ error }}</span>
-                        {% endfor %}
+                <div class="row g-5">
+                    <div class="col-md-4">
+                        <button type="submit" class="btn btn-outline-secondary" mb-3
+                        "">Order More Than One Pizza</button>
                     </div>
                 </div>
             </div>
-            <div class="row g-5">
-                <div class="col">
-                    <div class="p-3">
-                        <label for="{{ form.sauce_type.id_for_label }}">{{ form.sauce_type.label }}</label>
-                        {{ form.sauce_type|add_class:'form-select' }}
-                        {% for error in field.errors %}
-                            <span class="help-block">{{ error }}</span>
-                        {% endfor %}
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="p-3">
-                        <label for="{{ form.sauce_amount.id_for_label }}">{{ form.sauce_amount.label }}</label>
-                        {{ form.sauce_amount|add_class:'form-select' }}
-                        {% for error in field.errors %}
-                            <span class="help-block">{{ error }}</span>
-                        {% endfor %}
-                    </div>
-                </div>
-            </div>
-            {% for item in form.topping_selection %}
-            <div class="row g-5">
-                <div class="col">
-                    {{ item }}
-                </div>
-                <div class="col">
-                    {{ item }}
-                </div>
-            </div>
-            {% endfor %}
-            <button type="submit" class="btn btn-outline-secondary">Order Pizza</button>
-        </div>
-    </form>
-
-    {#        topping_selection#}
-    {% if note %}
-        <p>{{ note }}</p>
-    {% endif %}
-
-    {% if created_pizza_pk %}
-        <a href="{% url 'edit_order' created_pizza_pk %}">
-            Edit Order
-        </a>
-    {% endif %}
-
-    <h2>Want to order more than one pizza?</h2>
-
-    <form action="{% url 'multi_pizzas' %}" method='get'>
-        {{ multiple_form }}
-        <button type="submit">Order More Than One Pizza</button>
-    </form>
-
-</div>
-
-<!-- Optional JavaScript; choose one of the two! -->
-
-<!-- Option 1: Bootstrap Bundle with Popper -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
-        crossorigin="anonymous"></script>
-
-<!-- Option 2: Separate Popper and Bootstrap JS -->
-<!--
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js" integrity="sha384-q2kxQ16AaE6UbzuKqyBE9/u/KzioAlnx2maXQHiDX9d4/zp8Ok3f+M7DPm+Ib6IU" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-pQQkAEnwaBkjpqZ8RU1fF1AKtTcHJwFl3pblpTlHXybJjHpMYo79HY3hIi4NKxyj" crossorigin="anonymous"></script>
--->
-</body>
-</html>
+        </form>
+    </div>
+{% endblock %}

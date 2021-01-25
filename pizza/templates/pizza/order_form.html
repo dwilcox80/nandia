@@ -1,0 +1,191 @@
+{% block content %}
+
+    {% load widget_tweaks %}
+
+    <div class="container px-4 mb-3">
+        <form action="{% url 'order' %}" method="post" novalidate>
+            {% csrf_token %}
+            <div class="form-control">
+                <div class="row g-5">
+                    <div class="col">
+                        <div class="p-3">
+                            <label for="{{ form.size_selection.id_for_label }}">{{ form.size_selection.label }}</label>
+                            {{ form.size_selection|add_class:'form-select' }}
+                            {% for error in field.errors %}
+                                <span class="help-block">{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="p-3">
+                            <label for="{{ form.crust_selection.id_for_label }}">{{ form.crust_selection.label }}</label>
+                            {{ form.crust_selection|add_class:'form-select' }}
+                            {% for error in field.errors %}
+                                <span class="help-block">{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-control">
+                <div class="row g-5">
+                    <div class="col">
+                        <div class="p-3">
+                            <label for="{{ form.sauce_type.id_for_label }}">{{ form.sauce_type.label }}</label>
+                            {{ form.sauce_type|add_class:'form-select' }}
+                            {% for error in field.errors %}
+                                <span class="help-block">{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="p-3">
+                            <label for="{{ form.sauce_amount.id_for_label }}">{{ form.sauce_amount.label }}</label>
+                            {{ form.sauce_amount|add_class:'form-select' }}
+                            {% for error in field.errors %}
+                                <span class="help-block">{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-control">
+                <div class="row g-5">
+                    <div class="col-md-4">
+                        <label for="{{ form.topping_selection.label }}"
+                               class="p-3">{{ form.topping_selection.label }}</label>
+                    </div>
+                </div>
+                <div class="row g-5">
+                    <div class="col-md-6">
+                        <div class="p-3">
+                            {{ form.topping_selection.0 }}
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="p-3">
+                            {{ form.topping_selection.1 }}
+                        </div>
+                    </div>
+                </div>
+                <div class="row g-5">
+                    <div class="col-md-6">
+                        <div class="p-3">
+                            {{ form.topping_selection.2 }}
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="p-3">
+                            {{ form.topping_selection.3 }}
+                        </div>
+                    </div>
+                </div>
+                <div class="row g-5">
+                    <div class="col-md-6">
+                        <div class="p-3">
+                            {{ form.topping_selection.4 }}
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="p-3">
+                            {{ form.topping_selection.5 }}
+                        </div>
+                    </div>
+                </div>
+                <div class="row g-5">
+                    <div class="col-md-6">
+                        <div class="p-3">
+                            {{ form.topping_selection.6 }}
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="p-3">
+                            {{ form.topping_selection.7 }}
+                        </div>
+                    </div>
+                </div>
+                <div class="row g-5">
+                    <div class="col-md-6">
+                        <div class="p-3">
+                            {{ form.topping_selection.8 }}
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="p-3">
+                            {{ form.topping_selection.9 }}
+                        </div>
+                    </div>
+                </div>
+                <div class="row g-5">
+                    <div class="col-md-6">
+                        <div class="p-3">
+                            {{ form.topping_selection.10 }}
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="p-3">
+                            {{ form.topping_selection.11 }}
+                        </div>
+                    </div>
+                </div>
+                <div class="row g-5">
+                    <div class="col-md-6">
+                        <div class="p-3">
+                            {{ form.topping_selection.12 }}
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="p-3">
+                            {{ form.topping_selection.13 }}
+                        </div>
+                    </div>
+                </div>
+                <div class="row g-5">
+                    <div class="col-md-6">
+                        <div class="p-3">
+                            {{ form.topping_selection.14 }}
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="p-3">
+                            {{ form.topping_selection.15 }}
+                        </div>
+                    </div>
+                </div>
+                <div class="row g-5">
+                    <div class="col-md-6">
+                        <div class="p-3">
+                            {{ form.topping_selection.16 }}
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="p-3">
+                            {{ form.topping_selection.17 }}
+                        </div>
+                    </div>
+                </div>
+                <div class="row g-5">
+                    <div class="col-md-6">
+                        <div class="p-3">
+                            {{ form.topping_selection.18 }}
+                        </div>
+                    </div>
+                </div>
+                <div class="p-3">
+                    <button type="submit" class="btn btn-outline-secondary">Order Pizza</button>
+                </div>
+            </div>
+        </form>
+
+        {% if note %}
+            <p>{{ note }}</p>
+        {% endif %}
+
+        {% if created_pizza_pk %}
+            <a href="{% url 'edit_order' created_pizza_pk %}">
+                Edit Order
+            </a>
+        {% endif %}
+    </div>
+
+{% endblock %}

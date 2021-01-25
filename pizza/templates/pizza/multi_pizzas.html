@@ -1,16 +1,28 @@
-<h1>Order Pizzas</h1>
+{% extends 'pizza/base.html' %}
 
-<form action="{% url 'multi_pizzas' %}" method="post">
-    {% csrf_token %}
-    {{ formset.management_form }}
+{% block content %}
 
-    {% for form in formset %}
-    {{ form }}
-    {% endfor %}
+    {% load widget_tweaks %}
 
-    <button type="submit">Order Pizzas</button>
-</form>
+    <div class="container px-4">
+        <h1>Order Pizzas</h1>
+    </div>
+    <form action="{% url 'multi_pizzas' %}" method="post">
+        {% csrf_token %}
+        {{ formset.management_form }}
 
-{% if note %}
-    <p>{{ note }}</p>
-{% endif %}
+        {% for form in formset %}
+            <div class="container px-4">
+                <h3>Pizza {{ forloop.counter }}</h3>
+            </div>
+            {% include 'pizza/order_form.html' %}
+        {% endfor %}
+
+        <button type="submit">Order Pizzas</button>
+    </form>
+
+    {% if note %}
+        <p>{{ note }}</p>
+    {% endif %}
+
+{% endblock %}
